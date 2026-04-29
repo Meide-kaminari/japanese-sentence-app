@@ -25,7 +25,7 @@ if not st.session_state.auth:
 # ======================
 # 标题
 # ======================
-st.image("梦幻合照.png", use_container_width=True)
+st.image("微信图片_20260429155202_113_10.jpg", use_container_width=True)
 st.title("任崇雷的词典")
 
 # ======================
