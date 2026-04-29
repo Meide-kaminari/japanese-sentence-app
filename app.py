@@ -28,6 +28,7 @@ if not st.session_state.auth:
 # ======================
 st.image("tangyuan.jpg", use_container_width=True)
 
+img = Image.open("tangyuan.jpg")
 img = ImageOps.exif_transpose(img)
 
 st.image(img, use_container_width=True)
