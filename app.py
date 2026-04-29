@@ -21,36 +21,11 @@ if not st.session_state.auth:
 #背景
 st.markdown("""
 <style>
-/* 整体背景 */
 .stApp {
-    background: #f6f8fb;
-}
-
-/* 主内容区域卡片化 */
-.block-container {
-    padding: 2rem 2rem 2rem 2rem;
-    max-width: 800px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    margin-top: 2rem;
-}
-
-/* 输入框美化 */
-.stTextInput input {
-    border-radius: 10px;
-}
-
-/* 按钮美化 */
-.stButton button {
-    border-radius: 10px;
-    background-color: #4F8BF9;
-    color: white;
-    height: 3em;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
 }
 </style>
 """, unsafe_allow_html=True)
-
 
 st.title("任崇雷的词典")
 
