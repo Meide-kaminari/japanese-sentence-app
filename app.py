@@ -3,6 +3,9 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
+st.write("ENV TEST:", os.environ.keys())
+st.write("DEEPSEEK_API_KEY:", os.getenv("DEEPSEEK_API_KEY"))
+
 # 加载.env
 load_dotenv()
 api_key = os.getenv("DEEPSEEK_API_KEY")
