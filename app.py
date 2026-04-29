@@ -3,9 +3,6 @@ from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
-import streamlit as st
-
-st.title("APP STARTED")
 
 # 加载.env
 load_dotenv()
