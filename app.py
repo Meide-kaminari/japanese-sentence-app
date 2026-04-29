@@ -55,6 +55,12 @@ def get_client():
     )
 
 # ======================
+# 初始化 session_state（关键）
+# ======================
+if "results" not in st.session_state:
+    st.session_state.results = {}
+
+# ======================
 # 输入
 # ======================
 words_input = st.text_input("请输入单词或句子（空格隔开）")
@@ -95,9 +101,24 @@ if st.button("生成例句") and words_input:
 
         result = response.choices[0].message.content
 
-        # 显示结果
+        # ===== 保存结果（关键）=====
+        st.session_state.results[word] = result
+
+        # 显示
         st.success(result)
 
-        # 🔊 朗读按钮（关键修复：必须加 key）
+# ======================
+# 展示历史结果 + 朗读
+# ======================
+if st.session_state.results:
+
+    st.markdown("## 📚 已生成例句")
+
+    for i, (word, text) in enumerate(st.session_state.results.items()):
+
+        st.write(f"### {word}")
+        st.write(text)
+
+        # 🔊 朗读按钮（关键修复）
         if st.button(f"🔊 朗读 {word}", key=f"tts_{i}"):
-            speak_jp(result)
+            speak_jp(text)
