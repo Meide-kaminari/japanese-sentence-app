@@ -17,8 +17,31 @@ if not st.session_state.auth:
         else:
             st.error("密码错误")
     st.stop()
-    
+
+#背景
+st.markdown("""
+<style>
+.block-container {
+    padding-top: 2rem;
+    max-width: 800px;
+}
+
+.stTextInput, .stButton {
+    border-radius: 10px;
+}
+
+.css-1d391kg {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 st.title("任崇雷的词典")
+
 
 def get_client():
     api_key = os.getenv("DEEPSEEK_API_KEY")
