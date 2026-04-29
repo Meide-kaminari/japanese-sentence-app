@@ -4,21 +4,7 @@ from openai import OpenAI
 
 st.title("日语例句生成器")
 
-st.set_page_config(
-    page_title="日语例句生成器",
-    page_icon="🈶",
-    layout="centered",
-    initial_sidebar_state="collapsed"
-)
 
-hide_streamlit_style = """
-<style>
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
-</style>
-"""
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 def get_client():
     api_key = os.getenv("DEEPSEEK_API_KEY")
