@@ -7,10 +7,10 @@ import os
 
 # 加载.env
 load_dotenv()
-api_key = os.getenv("DEEPSEEK_API_KEY")
+api_key = os.environ["DEEPSEEK_API_KEY"]
 
 client = OpenAI(
-    api_key=os.getenv("DEEPSEEK_API_KEY"),
+    api_key=api_key,
     base_url="https://api.deepseek.com"
 )
 
