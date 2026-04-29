@@ -18,7 +18,15 @@ if not st.session_state.auth:
             st.error("密码错误")
     st.stop()
 
-
+def speak_jp(text):
+    st.components.v1.html(f"""
+    <script>
+        var msg = new SpeechSynthesisUtterance(`{text}`);
+        msg.lang = "ja-JP";
+        msg.rate = 1;
+        speechSynthesis.speak(msg);
+    </script>
+    """, height=0)
 
 
 st.title("任崇雷的词典")
@@ -71,3 +79,5 @@ if st.button("生成例句") and words_input:
 
         result = response.choices[0].message.content
         st.success(result)
+        if st.button(f"🔊 朗读 {word}"):
+    speak_jp(result)
