@@ -23,19 +23,6 @@ if not st.session_state.auth:
     st.stop()
 
 # ======================
-# 🔊 语音功能
-# ======================
-def speak_jp(text):
-    st.components.v1.html(f"""
-    <script>
-        var msg = new SpeechSynthesisUtterance(`{text}`);
-        msg.lang = "ja-JP";
-        msg.rate = 1;
-        speechSynthesis.speak(msg);
-    </script>
-    """, height=0)
-
-# ======================
 # 页面标题
 # ======================
 st.title("任崇雷的词典")
@@ -55,7 +42,7 @@ def get_client():
     )
 
 # ======================
-# 初始化 session_state（关键）
+# 初始化 session_state（防止丢数据）
 # ======================
 if "results" not in st.session_state:
     st.session_state.results = {}
@@ -76,14 +63,14 @@ easter_eggs = {
 }
 
 # ======================
-# 主逻辑
+# 生成逻辑
 # ======================
 if st.button("生成例句") and words_input:
 
     words = words_input.split()
     client = get_client()
 
-    for i, word in enumerate(words):
+    for word in words:
 
         # ===== 彩蛋 =====
         if word in easter_eggs:
@@ -101,24 +88,19 @@ if st.button("生成例句") and words_input:
 
         result = response.choices[0].message.content
 
-        # ===== 保存结果（关键）=====
+        # 保存（防止刷新丢失）
         st.session_state.results[word] = result
 
-        # 显示
         st.success(result)
 
 # ======================
-# 展示历史结果 + 朗读
+# 历史展示（不会丢）
 # ======================
 if st.session_state.results:
 
     st.markdown("## 📚 已生成例句")
 
-    for i, (word, text) in enumerate(st.session_state.results.items()):
+    for word, text in st.session_state.results.items():
 
         st.write(f"### {word}")
         st.write(text)
-
-        # 🔊 朗读按钮（关键修复）
-        if st.button(f"🔊 朗读 {word}", key=f"tts_{i}"):
-            speak_jp(text)
