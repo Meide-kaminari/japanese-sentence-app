@@ -23,7 +23,7 @@ if not st.session_state.auth:
     st.stop()
 
 # ======================
-# 页面标题
+# 标题
 # ======================
 st.title("任崇雷的词典")
 
@@ -40,12 +40,6 @@ def get_client():
         api_key=api_key,
         base_url="https://api.deepseek.com"
     )
-
-# ======================
-# 初始化 session_state（防止丢数据）
-# ======================
-if "results" not in st.session_state:
-    st.session_state.results = {}
 
 # ======================
 # 输入
@@ -88,19 +82,4 @@ if st.button("生成例句") and words_input:
 
         result = response.choices[0].message.content
 
-        # 保存（防止刷新丢失）
-        st.session_state.results[word] = result
-
         st.success(result)
-
-# ======================
-# 历史展示（不会丢）
-# ======================
-if st.session_state.results:
-
-    st.markdown("## 📚 已生成例句")
-
-    for word, text in st.session_state.results.items():
-
-        st.write(f"### {word}")
-        st.write(text)
