@@ -33,7 +33,7 @@ def get_client():
 
 client = None
 
-words_input = st.text_input("请输入多个单词（用空格隔开）")
+words_input = st.text_input("请输入单词或句子（多个单词或句子用空格隔开）")
 
 # ===== 彩蛋系统 =====
 easter_eggs = {
