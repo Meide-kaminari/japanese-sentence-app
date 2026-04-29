@@ -21,20 +21,32 @@ if not st.session_state.auth:
 #背景
 st.markdown("""
 <style>
-.block-container {
-    padding-top: 2rem;
-    max-width: 800px;
+/* 整体背景 */
+.stApp {
+    background: #f6f8fb;
 }
 
-.stTextInput, .stButton {
+/* 主内容区域卡片化 */
+.block-container {
+    padding: 2rem 2rem 2rem 2rem;
+    max-width: 800px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    margin-top: 2rem;
+}
+
+/* 输入框美化 */
+.stTextInput input {
     border-radius: 10px;
 }
 
-.css-1d391kg {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.08);
+/* 按钮美化 */
+.stButton button {
+    border-radius: 10px;
+    background-color: #4F8BF9;
+    color: white;
+    height: 3em;
 }
 </style>
 """, unsafe_allow_html=True)
