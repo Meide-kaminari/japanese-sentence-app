@@ -2,7 +2,10 @@ import streamlit as st
 import os
 from openai import OpenAI
 
-PASSWORD = "0502"  # 你自己改
+# ======================
+# 🔐 登录系统
+# ======================
+PASSWORD = "0502"
 
 if "auth" not in st.session_state:
     st.session_state.auth = False
@@ -16,8 +19,12 @@ if not st.session_state.auth:
             st.rerun()
         else:
             st.error("密码错误")
+
     st.stop()
 
+# ======================
+# 🔊 语音功能
+# ======================
 def speak_jp(text):
     st.components.v1.html(f"""
     <script>
@@ -28,10 +35,14 @@ def speak_jp(text):
     </script>
     """, height=0)
 
-
+# ======================
+# 页面标题
+# ======================
 st.title("任崇雷的词典")
 
-
+# ======================
+# DeepSeek client
+# ======================
 def get_client():
     api_key = os.getenv("DEEPSEEK_API_KEY")
     if not api_key:
@@ -43,11 +54,14 @@ def get_client():
         base_url="https://api.deepseek.com"
     )
 
-client = None
+# ======================
+# 输入
+# ======================
+words_input = st.text_input("请输入单词或句子（空格隔开）")
 
-words_input = st.text_input("请输入单词或句子（多个单词或句子用空格隔开）")
-
-# ===== 彩蛋系统 =====
+# ======================
+# 彩蛋系统
+# ======================
 easter_eggs = {
     "任崇雷": "🤖 被你发现了制作者，没错，就是无敌帅气聪明的任崇雷",
     "王秀坤": "这个是制作者的朋友，不可以生成例句。",
@@ -55,18 +69,20 @@ easter_eggs = {
     "任官镇": "我爹",
 }
 
+# ======================
+# 主逻辑
+# ======================
 if st.button("生成例句") and words_input:
 
     words = words_input.split()
-
     client = get_client()
 
-    for word in words:
+    for i, word in enumerate(words):
 
-        # ===== 彩蛋逻辑 =====
+        # ===== 彩蛋 =====
         if word in easter_eggs:
             st.success(easter_eggs[word])
-            continue   # ⚠️ 不要 stop，否则后面词会断掉
+            continue
 
         st.write(f"正在生成：{word}...")
 
@@ -78,6 +94,10 @@ if st.button("生成例句") and words_input:
         )
 
         result = response.choices[0].message.content
+
+        # 显示结果
         st.success(result)
-        if st.button(f"🔊 朗读 {word}"):
-    speak_jp(result)
+
+        # 🔊 朗读按钮（关键修复：必须加 key）
+        if st.button(f"🔊 朗读 {word}", key=f"tts_{i}"):
+            speak_jp(result)
