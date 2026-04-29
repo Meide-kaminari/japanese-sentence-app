@@ -2,6 +2,22 @@ import streamlit as st
 import os
 from openai import OpenAI
 
+PASSWORD = "123456"  # 你自己改
+
+if "auth" not in st.session_state:
+    st.session_state.auth = False
+
+if not st.session_state.auth:
+    pwd = st.text_input("请输入访问密码", type="password")
+
+    if st.button("进入"):
+        if pwd == PASSWORD:
+            st.session_state.auth = True
+            st.rerun()
+        else:
+            st.error("密码错误")
+    st.stop()
+    
 st.title("任崇雷的词典")
 
 def get_client():
