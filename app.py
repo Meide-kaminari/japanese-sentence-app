@@ -2,7 +2,7 @@ import streamlit as st
 import os
 from openai import OpenAI
 
-st.title("日语例句生成器")
+st.title("任崇雷的词典")
 
 
 
