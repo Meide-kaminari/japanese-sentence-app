@@ -18,14 +18,8 @@ if not st.session_state.auth:
             st.error("密码错误")
     st.stop()
 
-#背景
-st.markdown("""
-<style>
-.stApp {
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
-}
-</style>
-""", unsafe_allow_html=True)
+
+
 
 st.title("任崇雷的词典")
 
