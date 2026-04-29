@@ -4,14 +4,22 @@ from dotenv import load_dotenv
 import os
 
 
-# 加载.env
-load_dotenv()
-api_key = os.environ["DEEPSEEK_API_KEY"]
+import streamlit as st
+import os
+from openai import OpenAI
 
-client = OpenAI(
-    api_key=api_key,
-    base_url="https://api.deepseek.com"
-)
+def get_client():
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    if not api_key:
+        st.error("Missing API key")
+        st.stop()
+
+    return OpenAI(
+        api_key=api_key,
+        base_url="https://api.deepseek.com"
+    )
+
+client = get_client()
 
 
 st.title("日语例句生成器")
