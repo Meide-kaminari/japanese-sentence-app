@@ -2,7 +2,7 @@ import streamlit as st
 import os
 from openai import OpenAI
 
-PASSWORD = "123456"  # 你自己改
+PASSWORD = "0502"  # 你自己改
 
 if "auth" not in st.session_state:
     st.session_state.auth = False
